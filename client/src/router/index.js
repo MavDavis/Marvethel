@@ -12,11 +12,16 @@ const router = createRouter({
       children: [
         { path: '', name: 'home', component: () => import('@/views/HomeView.vue') },
         { path: 'about', name: 'about', component: () => import('@/views/AboutView.vue') },
-        { path: 'solutions', name: 'solutions', component: () => import('@/views/SolutionsView.vue') },
-        { path: 'services', name: 'services', component: () => import('@/views/ServicesView.vue') },
         { path: 'case-studies', name: 'case-studies', component: () => import('@/views/CaseStudiesView.vue') },
         { path: 'resources', name: 'resources', component: () => import('@/views/ResourcesView.vue') },
         { path: 'contact', name: 'contact', component: () => import('@/views/ContactView.vue') },
+        // Service pillars
+        { path: 'services/digital-marketing', name: 'digital-marketing', component: () => import('@/views/services/DigitalMarketingView.vue') },
+        { path: 'services/web-development', name: 'web-development', component: () => import('@/views/services/WebDevView.vue') },
+        { path: 'services/ai-solutions', name: 'ai-solutions', component: () => import('@/views/services/AiSolutionsView.vue') },
+        // Legacy redirects
+        { path: 'solutions', redirect: '/services/ai-solutions' },
+        { path: 'services', redirect: '/services/ai-solutions' },
       ]
     },
 
