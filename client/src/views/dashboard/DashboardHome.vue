@@ -81,9 +81,9 @@
           <div class="divide-y divide-gray-100 dark:divide-white/5">
             <div v-for="event in recentActivity" :key="event.id"
               class="flex items-center gap-4 px-6 py-4 hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors">
-              <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 border border-gray-200 dark:border-white/10"
+              <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 border border-gray-200 dark:border-white/10 text-base"
                 :style="{ background: event.iconBg }">
-                <component :is="event.icon" class="w-4 h-4" :class="event.iconColor" />
+                {{ event.emoji }}
               </div>
               <div class="flex-1 min-w-0">
                 <p class="text-sm text-gray-900 dark:text-white font-medium truncate">{{ event.title }}</p>
@@ -98,9 +98,9 @@
         <div class="grid sm:grid-cols-3 gap-4">
           <RouterLink v-for="action in quickActions" :key="action.label" :to="action.to"
             class="group flex flex-col gap-3 p-5 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] hover:border-gray-300 dark:hover:border-white/20 hover:bg-gray-50 dark:hover:bg-white/[0.05] transition-all">
-            <div class="w-9 h-9 rounded-xl border border-gray-200 dark:border-white/10 flex items-center justify-center"
+            <div class="w-9 h-9 rounded-xl border border-gray-200 dark:border-white/10 flex items-center justify-center text-base"
               style="background: rgba(214,255,1,0.06)">
-              <component :is="action.icon" class="w-5 h-5 text-lime-600 dark:text-accent" />
+              {{ action.emoji }}
             </div>
             <div>
               <div class="font-display font-semibold text-gray-900 dark:text-white text-sm">{{ action.label }}</div>
@@ -191,17 +191,11 @@ const chartRange = ref('30d')
 const hour = new Date().getHours()
 const timeOfDay = hour < 12 ? 'morning' : hour < 18 ? 'afternoon' : 'evening'
 
-const BrainIcon = { template: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>` }
-const BoltIcon = { template: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>` }
-const ChartIcon = { template: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zm9.75-9.75c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v16.5c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V3.375zm-4.5 7.5c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v9a1.125 1.125 0 01-1.125 1.125h-2.25A1.125 1.125 0 018.25 19.875v-9z"/></svg>` }
-const PlugIcon = { template: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>` }
-const FolderIcon = { template: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"/></svg>` }
-
 const stats = [
-  { label: 'Total AI Calls', value: '142,840', change: '+18.2%', icon: BrainIcon, highlight: true },
-  { label: 'Active Projects', value: '12', change: '+2', icon: FolderIcon },
-  { label: 'Automations Run', value: '3,412', change: '+24.1%', icon: BoltIcon },
-  { label: 'Avg. Response Time', value: '48ms', change: '-12ms', icon: ChartIcon },
+  { label: 'Total AI Calls', value: '142,840', change: '+18.2%', icon: '🤖', highlight: true },
+  { label: 'Active Projects', value: '12', change: '+2', icon: '📁' },
+  { label: 'Automations Run', value: '3,412', change: '+24.1%', icon: '⚡' },
+  { label: 'Avg. Response Time', value: '48ms', change: '-12ms', icon: '📊' },
 ]
 
 const chartPoints = [
@@ -219,16 +213,16 @@ const areaPath = computed(() => {
 })
 
 const recentActivity = [
-  { id: 1, title: 'Content Generator processed 840 requests', time: '2 min ago', icon: BrainIcon, iconBg: 'rgba(214,255,1,0.05)', iconColor: 'text-lime-600 dark:text-accent', badge: 'AI Tool', badgeVariant: 'accent' },
-  { id: 2, title: 'Automation "Weekly Report" completed', time: '18 min ago', icon: BoltIcon, iconBg: 'rgba(0,0,0,0.03)', iconColor: 'text-gray-400 dark:text-white/50', badge: 'Success', badgeVariant: 'success' },
-  { id: 3, title: 'Stripe integration connected', time: '1 hour ago', icon: PlugIcon, iconBg: 'rgba(0,0,0,0.03)', iconColor: 'text-gray-400 dark:text-white/50', badge: 'Integration', badgeVariant: 'default' },
-  { id: 4, title: 'Support Assistant deployed to staging', time: '3 hours ago', icon: BrainIcon, iconBg: 'rgba(214,255,1,0.05)', iconColor: 'text-lime-600 dark:text-accent', badge: 'AI Tool', badgeVariant: 'accent' },
+  { id: 1, title: 'Content Generator processed 840 requests', time: '2 min ago', emoji: '🤖', iconBg: 'rgba(214,255,1,0.05)', badge: 'AI Tool', badgeVariant: 'accent' },
+  { id: 2, title: 'Automation "Weekly Report" completed', time: '18 min ago', emoji: '⚡', iconBg: 'rgba(0,0,0,0.03)', badge: 'Success', badgeVariant: 'success' },
+  { id: 3, title: 'Stripe integration connected', time: '1 hour ago', emoji: '🔌', iconBg: 'rgba(0,0,0,0.03)', badge: 'Integration', badgeVariant: 'default' },
+  { id: 4, title: 'Support Assistant deployed to staging', time: '3 hours ago', emoji: '🤖', iconBg: 'rgba(214,255,1,0.05)', badge: 'AI Tool', badgeVariant: 'accent' },
 ]
 
 const quickActions = [
-  { label: 'New AI Tool', sub: 'Build with AI Builder', to: '/dashboard/ai-tools', icon: BrainIcon },
-  { label: 'New Automation', sub: 'Create a workflow', to: '/dashboard/automation', icon: BoltIcon },
-  { label: 'Add Integration', sub: 'Connect your stack', to: '/dashboard/integrations', icon: PlugIcon },
+  { label: 'New AI Tool', sub: 'Build with AI Builder', to: '/dashboard/ai-tools', emoji: '🤖' },
+  { label: 'New Automation', sub: 'Create a workflow', to: '/dashboard/automation', emoji: '⚡' },
+  { label: 'Add Integration', sub: 'Connect your stack', to: '/dashboard/integrations', emoji: '🔌' },
 ]
 
 const activeTools = [

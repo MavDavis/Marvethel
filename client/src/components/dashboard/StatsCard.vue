@@ -3,8 +3,8 @@
     <!-- Label + Icon -->
     <div class="flex items-center justify-between">
       <span class="text-gray-500 dark:text-white/50 text-xs font-medium uppercase tracking-wider">{{ label }}</span>
-      <div v-if="icon" class="w-8 h-8 rounded-lg border border-gray-200 dark:border-white/10 flex items-center justify-center">
-        <component :is="icon" class="w-4 h-4 text-gray-400 dark:text-white/50" />
+      <div v-if="icon" class="w-8 h-8 rounded-lg border border-gray-200 dark:border-white/10 flex items-center justify-center text-sm">
+        {{ icon }}
       </div>
     </div>
 
@@ -36,7 +36,7 @@ const props = defineProps({
   label: { type: String, required: true },
   value: { type: String, required: true },
   change: { type: String, default: '0%' },
-  icon: { type: Object, default: null },
+  icon: { type: String, default: null },
   highlight: { type: Boolean, default: false }
 })
 
